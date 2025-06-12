@@ -44,23 +44,23 @@ class Cities_Weather_Widget extends WP_Widget
         ]);
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>">Заголовок:</label>
+            <label for="<?=  $this->get_field_id('title'); ?>">Заголовок:</label>
             <input class="widefat"
-                   id="<?php echo $this->get_field_id('title'); ?>"
-                   name="<?php echo $this->get_field_name('title'); ?>"
+                   id="<?= $this->get_field_id('title'); ?>"
+                   name="<?= $this->get_field_name('title'); ?>"
                    type="text"
-                   value="<?php echo esc_attr($title); ?>">
+                   value="<?= esc_attr($title); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('city_id'); ?>">Выберите город:</label>
+            <label for="<?= $this->get_field_id('city_id'); ?>">Выберите город:</label>
             <select class="widefat"
-                    id="<?php echo $this->get_field_id('city_id'); ?>"
-                    name="<?php echo $this->get_field_name('city_id'); ?>">
+                    id="<?= $this->get_field_id('city_id'); ?>"
+                    name="<?= $this->get_field_name('city_id'); ?>">
                 <option value="">-- Выберите город --</option>
                 <?php foreach ($cities as $city): ?>
-                    <option value="<?php echo $city->ID; ?>"
+                    <option value="<?= $city->ID; ?>"
                         <?php selected($city_id, $city->ID); ?>>
-                        <?php echo $city->post_title; ?>
+                        <?= $city->post_title; ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -86,7 +86,7 @@ class Cities_Weather_Widget extends WP_Widget
 
         $weather = get_weather($city_name);
         if (is_array($weather)) {
-            echo "<p>Температура: {$weather['temp']}</p>";
+            echo "<p>Температура: {$weather['temp']} °C</p>";
             echo "<p>Погода: {$weather['description']}</p>";
             echo "<p><small>Координаты:" . esc_html($weather['lat']) . ", " . esc_html($weather['lon']) . " </small></p>";
         } else {
@@ -105,7 +105,6 @@ function register_cities_weather_widget()
 
 add_action('widgets_init', 'register_cities_weather_widget');
 
-// Добавим CSS для виджета
 function cities_weather_widget_styles()
 {
     ?>
