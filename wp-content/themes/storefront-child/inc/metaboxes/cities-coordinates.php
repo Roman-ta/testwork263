@@ -68,28 +68,28 @@ function save_cities_coordinates($post_id)
         return;
     }
 
-    // Проверяем права пользователя
+    // root user
     if (!current_user_can('edit_post', $post_id)) {
         return;
     }
 
-    // Проверяем, что это не автосохранение
+    // !autosave
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return;
     }
 
-    // Проверяем тип записи
+    // type
     if (get_post_type($post_id) != 'cities') {
         return;
     }
 
-    // Сохраняем широту
+    // save lat
     if (isset($_POST['cities_latitude'])) {
         $latitude = sanitize_text_field($_POST['cities_latitude']);
         update_post_meta($post_id, '_cities_latitude', $latitude);
     }
 
-    // Сохраняем долготу
+    // save lon
     if (isset($_POST['cities_longitude'])) {
         $longitude = sanitize_text_field($_POST['cities_longitude']);
         update_post_meta($post_id, '_cities_longitude', $longitude);
